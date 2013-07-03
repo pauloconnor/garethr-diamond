@@ -13,6 +13,13 @@ For experimenting you're probably fine just with:
 This installs diamond but doesn't ship the metrics anywhere, it just
 runs the archive handler.
 
+If you wish to install the newest version from [GitHub](https://github.com/BrightcoveOS/Diamond),
+you can do so by setting package to no:
+
+    class { 'diamond':
+      package       => no,
+    }
+
 ## Configuration
 
 This module currently exposes a few configurable options, for example 

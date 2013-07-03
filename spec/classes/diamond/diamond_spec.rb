@@ -64,4 +64,19 @@ describe 'diamond', :type => :class do
     it { should contain_service('diamond').with_ensure('stopped').with_enable('false') }
   end
 
+  context 'with git repository' do
+    it { should contain_file('/usr/bin/diamond')}
+    it { should create_class('diamond::config')}
+    it { should create_class('diamond::install')}
+    it { should create_class('diamond::service')}
+
+    it { should contain_file('/etc/diamond/diamond.conf').with_content(/interval = 30/)}
+
+    it { should_not contain_file('/etc/diamond/diamond.conf').with_content(/diamond.handler.librato.LibratoHandler/)}
+    it { should_not contain_file('/etc/diamond/diamond.conf').with_content(/diamond.handler.graphite.GraphiteHandler/)}
+    it { should_not contain_file('/etc/diamond/diamond.conf').with_content(/diamond.handler.riemann.RiemannHandler/)}
+
+    it { should contain_service('diamond').with_ensure('running').with_enable('true') }
+  end
+
 end

@@ -36,6 +36,7 @@ class diamond(
   $librato_apikey = false,
   $graphite_host = false,
   $riemann_host = false,
+  $package = true,
 ) {
   class{'diamond::install': } ->
   class{'diamond::config': } ~>
